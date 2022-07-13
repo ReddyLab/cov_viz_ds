@@ -1,4 +1,6 @@
-pub mod data_structures;
+mod data_structures;
+
+pub use crate::data_structures::*;
 
 #[cfg(test)]
 mod tests {
