@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::data_structures::Interval;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChromosomeData {
     pub chrom: String,
     pub bucket_size: u32,

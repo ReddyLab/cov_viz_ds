@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::data_structures::RegEffectData;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Interval {
     pub start: u32,
     pub values: Vec<RegEffectData>,
