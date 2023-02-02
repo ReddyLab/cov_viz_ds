@@ -4,7 +4,7 @@ use crate::data_structures::DbID;
 use rustc_hash::FxHashSet;
 
 #[derive(Serialize, Deserialize, Copy, Clone, Debug, Eq, PartialEq, Hash)]
-pub struct Bucket(pub usize, pub u32);
+pub struct Bucket(pub u8, pub u32);
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct RegEffectFacets(pub Vec<DbID>, pub f32, pub f32);
