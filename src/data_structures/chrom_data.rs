@@ -5,15 +5,17 @@ use crate::data_structures::Interval;
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChromosomeData {
     pub chrom: String,
+    pub index: u8,
     pub bucket_size: u32,
     pub target_intervals: Vec<Interval>,
     pub source_intervals: Vec<Interval>,
 }
 
 impl ChromosomeData {
-    pub fn from(chrom: &str, bucket_size: u32) -> Self {
+    pub fn from(chrom: &str, chrom_idx: u8, bucket_size: u32) -> Self {
         let cd = ChromosomeData {
             chrom: chrom.to_string(),
+            index: chrom_idx,
             bucket_size: bucket_size,
             source_intervals: Vec::new(),
             target_intervals: Vec::new(),
