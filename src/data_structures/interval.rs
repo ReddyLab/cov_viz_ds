@@ -4,19 +4,19 @@ use serde::de::{self, Deserializer, MapAccess, SeqAccess, Visitor};
 use serde::ser::{SerializeStruct, Serializer};
 use serde::{Deserialize, Serialize};
 
-use crate::data_structures::RegEffectData;
+use crate::data_structures::FeatureData;
 
 #[derive(Debug, Clone)]
 pub struct Interval {
     pub start: u32,
-    pub values: Vec<RegEffectData>,
+    pub values: Vec<FeatureData>,
 }
 
 const INTERVAL_FIELD_START: &str = "start";
 const INTERVAL_FIELD_VALUES: &str = "values";
 
 impl Interval {
-    fn new(start: u32, values: Vec<RegEffectData>) -> Self {
+    fn new(start: u32, values: Vec<FeatureData>) -> Self {
         Interval {
             start: start,
             values: values,
