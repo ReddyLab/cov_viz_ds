@@ -9,20 +9,24 @@ pub struct Bucket(pub u8, pub u32);
 
 // (feature id, discrete facet ids, effect size, significance)
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct RegEffectFacets(pub DbID, pub Vec<DbID>, pub f32, pub f32);
+pub struct RegEffectFacets {
+    pub reo_id: DbID,
+    pub feature_id: DbID,
+    pub facet_ids: Vec<DbID>,
+    pub effect_size: f32,
+    pub significance: f32,
+}
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct RegEffectData {
-    pub id: DbID,
     pub facets: Vec<RegEffectFacets>,
     pub associated_buckets: Vec<Bucket>,
     associated_buckets_set: FxHashSet<Bucket>,
 }
 
 impl RegEffectData {
-    pub fn new(id: DbID) -> Self {
+    pub fn new() -> Self {
         RegEffectData {
-            id,
             facets: Vec::new(),
             associated_buckets: Vec::new(),
             associated_buckets_set: FxHashSet::default(),
