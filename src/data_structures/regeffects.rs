@@ -3,27 +3,30 @@ use serde::{Deserialize, Serialize};
 use crate::data_structures::DbID;
 use rustc_hash::FxHashSet;
 
+// (chromosome index, bucket index)
 #[derive(Serialize, Deserialize, Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Bucket(pub u8, pub u32);
 
+// (feature id, discrete facet ids, effect size, significance)
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct RegEffectFacets(pub Vec<DbID>, pub f32, pub f32);
+pub struct RegEffectFacets(pub DbID, pub Vec<DbID>, pub f32, pub f32);
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct RegEffectData {
+    pub id: DbID,
     pub facets: Vec<RegEffectFacets>,
     pub associated_buckets: Vec<Bucket>,
     associated_buckets_set: FxHashSet<Bucket>,
 }
 
 impl RegEffectData {
-    pub fn new() -> Self {
-        let red = RegEffectData {
+    pub fn new(id: DbID) -> Self {
+        RegEffectData {
+            id,
             facets: Vec::new(),
             associated_buckets: Vec::new(),
             associated_buckets_set: FxHashSet::default(),
-        };
-        red
+        }
     }
 
     pub fn add_facets(&mut self, facets: RegEffectFacets) {
