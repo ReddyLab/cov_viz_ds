@@ -21,8 +21,10 @@ pub struct ObservationData {
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct FeatureData {
-    pub id: DbID,
-    pub facets: Vec<ObservationData>,
+    pub id: DbID,                     // Database id of source/target DNA Feature
+    pub facets: Vec<ObservationData>, // Data about all REOs of this feature
+    // If this is a source feature, these are the buckets any REO targets are in.
+    // If this is a target feature, these are the buckets any REO sources are in.
     pub associated_buckets: Vec<BucketLoc>,
     associated_buckets_set: FxHashSet<BucketLoc>,
 }
