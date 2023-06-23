@@ -12,7 +12,7 @@ pub const FACET_SIGNIFICANCE: &str = "Significance";
 pub const FACET_RAW_P_VALUE: &str = "Raw p value";
 pub const FACET_GRNA_TYPE: &str = "gRNA Type";
 
-pub const FACET_TYPE_DISCRETE: &str = "FacetType.DISCRETE";
+pub const FACET_TYPE_CATEGORICAL: &str = "FacetType.CATEGORICAL";
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum FacetCoverage {

@@ -13,7 +13,7 @@ pub struct BucketLoc {
 pub struct ObservationData {
     pub reo_id: DbID,
     // facet_ids should contain the IDs of both the REO's and the associated feature's
-    // discrete facet values
+    // categorical facet values
     pub facet_ids: Vec<DbID>,
     pub effect_size: f32,
     pub significance: f32,
