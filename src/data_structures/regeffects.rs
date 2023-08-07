@@ -16,7 +16,7 @@ pub struct ObservationData {
     // categorical facet values
     pub facet_ids: Vec<DbID>,
     pub effect_size: f32,
-    pub significance: f32,
+    pub significance: f64,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]

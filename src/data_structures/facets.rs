@@ -23,6 +23,9 @@ pub enum FacetCoverage {
 #[derive(Clone, Copy, Serialize, Deserialize, Debug)]
 pub struct FacetRange(pub f32, pub f32);
 
+#[derive(Clone, Copy, Serialize, Deserialize, Debug)]
+pub struct FacetRange64(pub f64, pub f64);
+
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Facet {
     pub id: DbID,
@@ -31,6 +34,7 @@ pub struct Facet {
     pub description: String,
     pub coverage: Option<FxHashSet<FacetCoverage>>,
     pub range: Option<FacetRange>,
+    pub range64: Option<FacetRange64>,
     pub values: Option<FxHashMap<DbID, String>>,
 }
 
