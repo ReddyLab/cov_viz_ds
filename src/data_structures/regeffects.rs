@@ -1,9 +1,8 @@
 use serde::{Deserialize, Serialize};
 
 use crate::data_structures::DbID;
-use rustc_hash::FxHashSet;
 
-#[derive(Serialize, Deserialize, Copy, Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Serialize, Deserialize, Copy, Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord)]
 pub struct BucketLoc {
     pub chrom: u8, // Chromosome index, e.g. chr1 has index 0, chrX is index 22
     pub idx: u32,  // intra-chromosome bucket index
@@ -12,41 +11,12 @@ pub struct BucketLoc {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ObservationData {
     pub reo_id: DbID,
-    // facet_ids should contain the IDs of both the REO's and the associated feature's
+    // facet_value_ids should contain the IDs of both the REO's and the associated feature's
     // categorical facet values
-    pub facet_ids: Vec<DbID>,
+    pub facet_value_ids: Vec<DbID>,
+    pub source_id: DbID,
+    pub target_id: Option<DbID>,
     pub effect_size: f32,
     pub significance: f64,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct FeatureData {
-    pub id: DbID,                     // Database id of source/target DNA Feature
-    pub facets: Vec<ObservationData>, // Data about all REOs of this feature
-    // If this is a source feature, these are the buckets any REO targets are in.
-    // If this is a target feature, these are the buckets any REO sources are in.
-    pub associated_buckets: Vec<BucketLoc>,
-    associated_buckets_set: FxHashSet<BucketLoc>,
-}
-
-impl FeatureData {
-    pub fn new(id: DbID) -> Self {
-        FeatureData {
-            id,
-            facets: Vec::new(),
-            associated_buckets: Vec::new(),
-            associated_buckets_set: FxHashSet::default(),
-        }
-    }
-
-    pub fn add_facets(&mut self, facets: ObservationData) {
-        self.facets.push(facets);
-    }
-
-    pub fn update_buckets(&mut self, new_buckets: &FxHashSet<BucketLoc>) {
-        for bucket in new_buckets - &self.associated_buckets_set {
-            self.associated_buckets.push(bucket);
-        }
-        self.associated_buckets_set.extend(new_buckets.iter());
-    }
+    pub neg_log_significance: f64,
 }
